@@ -1,6 +1,5 @@
 package br.com.brainweb.interview.core.features.powerstats;
 
-import br.com.brainweb.interview.core.features.hero.HeroController;
 import br.com.brainweb.interview.model.PowerStats;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -16,7 +15,7 @@ class PowerStatsAssembler implements RepresentationModelAssembler<PowerStats, En
     @Override
     public EntityModel<PowerStats> toModel(PowerStats ps) {
         return new EntityModel<>(ps, //
-                WebMvcLinkBuilder.linkTo(methodOn(HeroController.class).getOneHero(ps.getId().toString())).withSelfRel(),
-                linkTo(methodOn(HeroController.class).getAllHeroes()).withRel("heroes"));
+                WebMvcLinkBuilder.linkTo(methodOn(PowerStatsController.class).getOnePowerStats(ps.getId())).withSelfRel(),
+                linkTo(methodOn(PowerStatsController.class).getAllPowerStats()).withRel("powerStats"));
     }
 }

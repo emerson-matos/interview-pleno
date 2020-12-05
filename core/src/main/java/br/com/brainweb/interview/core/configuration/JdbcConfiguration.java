@@ -41,7 +41,7 @@ public class JdbcConfiguration {
         return dataSource;
     }
 
-    @Bean(name="transactionManager")
+    @Bean(name = "transactionManager")
     public PlatformTransactionManager platformTransactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }

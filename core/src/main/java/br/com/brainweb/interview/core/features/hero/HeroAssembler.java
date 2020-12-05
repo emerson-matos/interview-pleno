@@ -14,7 +14,7 @@ class HeroAssembler implements RepresentationModelAssembler<Hero, EntityModel<He
     @Override
     public EntityModel<Hero> toModel(Hero hero) {
         return new EntityModel<>(hero, //
-                linkTo(methodOn(HeroController.class).getOneHero(hero.getId().toString())).withSelfRel(),
+                linkTo(methodOn(HeroController.class).getOneHero(hero.getId())).withSelfRel(),
                 linkTo(methodOn(HeroController.class).getAllHeroes()).withRel("heroes"));
     }
 }

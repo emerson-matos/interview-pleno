@@ -1,13 +1,18 @@
 package br.com.brainweb.interview.core.features.hero;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import br.com.brainweb.interview.model.Hero;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/hero")
@@ -23,20 +28,24 @@ public class HeroController {
     }
 
     @GetMapping
-    public EntityModel<Hero> getAllHeroes() {
-        return null;
+    public CollectionModel<EntityModel<Hero>> getAllHeroes() {
+        List<EntityModel<Hero>> heroes =
+                heroService.findAll().stream()
+                        .map(heroAssembler::toModel).collect(Collectors.toList());
+        return new CollectionModel<>(heroes, linkTo(methodOn(HeroController.class).getAllHeroes()).withSelfRel());
     }
 
     @GetMapping("/{id}")
-    public EntityModel<Hero> getOneHero(@PathVariable("id") String id) {
-        return null;
+    public ResponseEntity<EntityModel<Hero>> getOneHero(@PathVariable("id") UUID id) {
+        Hero hero = heroService.getOne(id);
+        return ResponseEntity.ok().body(heroAssembler.toModel(hero));
     }
 
     @PostMapping
     public ResponseEntity<EntityModel<Hero>> createHero(@RequestBody Hero hero) {
         Hero newHero = heroService.save(hero);
         return ResponseEntity //
-                .created(linkTo(methodOn(HeroController.class).getOneHero(newHero.getId().toString())).toUri()) //
+                .created(linkTo(methodOn(HeroController.class).getOneHero(newHero.getId())).toUri()) //
                 .body(heroAssembler.toModel(newHero));
     }
 }

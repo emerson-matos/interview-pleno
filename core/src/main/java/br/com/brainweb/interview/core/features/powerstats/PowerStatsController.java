@@ -1,11 +1,16 @@
 package br.com.brainweb.interview.core.features.powerstats;
 
+import br.com.brainweb.interview.core.features.hero.HeroController;
 import br.com.brainweb.interview.model.PowerStats;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -24,20 +29,24 @@ public class PowerStatsController {
     }
 
     @GetMapping
-    public EntityModel<PowerStats> getAllHeroes() {
-        return null;
+    public CollectionModel<EntityModel<PowerStats>> getAllPowerStats() {
+        List<EntityModel<PowerStats>> heroes =
+                service.findAll().stream()
+                        .map(assembler::toModel).collect(Collectors.toList());
+        return new CollectionModel<>(heroes, linkTo(methodOn(HeroController.class).getAllHeroes()).withSelfRel());
     }
 
     @GetMapping("/{id}")
-    public EntityModel<PowerStats> getOneHero(@PathVariable("id") String id) {
-        return null;
+    public ResponseEntity<EntityModel<PowerStats>> getOnePowerStats(@PathVariable("id") UUID id) {
+        PowerStats ps = service.findOne(id);
+        return ResponseEntity.ok().body(assembler.toModel(ps));
     }
 
     @PostMapping
     public ResponseEntity<EntityModel<PowerStats>> createHero(@RequestBody PowerStats powerStats) {
         PowerStats newPowerStats = service.save(powerStats);
         return ResponseEntity //
-                .created(linkTo(methodOn(PowerStatsController.class).getOneHero(newPowerStats.getId().toString())).toUri()) //
+                .created(linkTo(methodOn(PowerStatsController.class).getOnePowerStats(newPowerStats.getId())).toUri()) //
                 .body(assembler.toModel(newPowerStats));
     }
 }
