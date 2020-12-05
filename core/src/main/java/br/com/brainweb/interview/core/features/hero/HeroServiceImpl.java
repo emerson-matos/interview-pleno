@@ -1,17 +1,21 @@
 package br.com.brainweb.interview.core.features.hero;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+
 import br.com.brainweb.interview.exception.NotFoundException;
 import br.com.brainweb.interview.model.Hero;
 import br.com.brainweb.interview.model.RACE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-
 @Service
 public class HeroServiceImpl implements HeroService {
 
-    private HeroRepository heroRepository;
+    private final HeroRepository heroRepository;
 
     @Autowired
     public HeroServiceImpl(HeroRepository heroRepository) {

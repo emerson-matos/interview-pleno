@@ -1,17 +1,17 @@
 package br.com.brainweb.interview.core.features.powerstats;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 import br.com.brainweb.interview.exception.NotFoundException;
 import br.com.brainweb.interview.model.PowerStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
 @Service
 public class PowerStatsServiceImpl implements PowerStatsService {
-    private PowerStatsRepository repository;
+    private final PowerStatsRepository repository;
 
     @Autowired
     public PowerStatsServiceImpl(PowerStatsRepository heroRepository) {

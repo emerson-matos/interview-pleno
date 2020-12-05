@@ -1,5 +1,8 @@
 package br.com.brainweb.interview.core.configuration;
 
+import javax.sql.DataSource;
+import java.util.concurrent.TimeUnit;
+
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -7,9 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import javax.sql.DataSource;
-import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class JdbcConfiguration {
@@ -55,7 +55,8 @@ public class JdbcConfiguration {
      * Identifies how many connections can be opened based on Postgres recommended formula.
      *
      * @return pool size capacity
-     * @see <a href="https://wiki.postgresql.org/wiki/Number_Of_Database_Connections#How_to_Find_the_Optimal_Database_Connection_Pool_Size" />
+     * @see
+     * <a href="https://wiki.postgresql.org/wiki/Number_Of_Database_Connections#How_to_Find_the_Optimal_Database_Connection_Pool_Size" />
      */
     private int getMaxPoolSize() {
         return (Runtime.getRuntime().availableProcessors() * 2) + 1;

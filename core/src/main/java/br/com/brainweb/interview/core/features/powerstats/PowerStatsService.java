@@ -1,10 +1,10 @@
 package br.com.brainweb.interview.core.features.powerstats;
 
-import br.com.brainweb.interview.exception.NotFoundException;
-import br.com.brainweb.interview.model.PowerStats;
-
 import java.util.List;
 import java.util.UUID;
+
+import br.com.brainweb.interview.exception.NotFoundException;
+import br.com.brainweb.interview.model.PowerStats;
 
 interface PowerStatsService {
 
