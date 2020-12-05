@@ -17,7 +17,7 @@ Bom, aqui começa a explicação do que você terá que nos entregar. Leia com a
 Ah, o Alfred (acho que ele é tipo um mordono do Sr. Wayne) começou o projeto para nós e o esqueleto do projeto já existe.
 <p> Dito isso vamos deixar uma lista com as tarefas:
 
-- [ ] Criar endpoint de criação de heróis respeitando os campos obrigatórios. ***Olhe o script SQL dentro do projeto para saber quais são os campos obrigatórios.***;
+- [x] Criar endpoint de criação de heróis respeitando os campos obrigatórios. ***Olhe o script SQL dentro do projeto para saber quais são os campos obrigatórios.***;
 - [ ] Criar endpoint de busca de heróis por ID. ***Caso não encontre o herói o sistema deve retornar um erro 404 (Not Found)***;
 - [ ] Criar endpoint de busca de heróis por filtro, nesse caso o filtro será apenas o nome. ***Caso não encontre nenhum herói o sistema deve retornar um sucesso 200 com o body vazio***;
 - [ ] Criar endpoint de atualização de heróis, todos os campos poderão ser atualizados. ***Caso não encontre o herói o sistema deve retornar um erro 404 (Not Found)***;

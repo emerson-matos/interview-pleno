@@ -1,0 +1,43 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres_container
+    build: core/src/main/resources/db/schema/
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${SPRING_DATASOURCE_DB:-postgres}
+      POSTGRES_USER: ${SPRING_DATASOURCE_USERNAME:-brainweb}
+      POSTGRES_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-brainweb}
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    volumes:
+      - ./pgadmin:/root/.pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+#  api:
+#    container_name: api_container
+#    build: .
+#    volumes:
+#      - ./api:?
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - postgres
+#    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
