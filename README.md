@@ -17,13 +17,13 @@ Bom, aqui começa a explicação do que você terá que nos entregar. Leia com a
 Ah, o Alfred (acho que ele é tipo um mordono do Sr. Wayne) começou o projeto para nós e o esqueleto do projeto já existe.
 <p> Dito isso vamos deixar uma lista com as tarefas:
 
-- [x] Criar endpoint de criação de heróis respeitando os campos obrigatórios. ***Olhe o script SQL dentro do projeto para saber quais são os campos obrigatórios.***;
-- [x] Criar endpoint de busca de heróis por ID. ***Caso não encontre o herói o sistema deve retornar um erro 404 (Not Found)***;
-- [x] Criar endpoint de busca de heróis por filtro, nesse caso o filtro será apenas o nome. ***Caso não encontre nenhum herói o sistema deve retornar um sucesso 200 com o body vazio***;
-- [x] Criar endpoint de atualização de heróis, todos os campos poderão ser atualizados. ***Caso não encontre o herói o sistema deve retornar um erro 404 (Not Found)***;
-- [x] Criar endpoint de exclusão de heróis. A exclusão será física, ok? (Física?! É, deleta o registro da base). ***Caso não encontre o herói o sistema deve retornar um erro 404 (Not Found)***;
-- [x] Criar testes unitários e de integração das funcionalidades desenvolvidas. ***As classes de teste unitário terminam com o prefixo `Test.java` e as classes de teste de integração terminam com `IT.java`. Temos um modelo de classe de exemplo dentro do projeto***; 
-- [x] Criar um `docker-compose.yml` funcional para execução da aplicação. (Banco de Dados + API).
+- [ ] Criar endpoint de criação de heróis respeitando os campos obrigatórios. ***Olhe o script SQL dentro do projeto para saber quais são os campos obrigatórios.***;
+- [ ] Criar endpoint de busca de heróis por ID. ***Caso não encontre o herói o sistema deve retornar um erro 404 (Not Found)***;
+- [ ] Criar endpoint de busca de heróis por filtro, nesse caso o filtro será apenas o nome. ***Caso não encontre nenhum herói o sistema deve retornar um sucesso 200 com o body vazio***;
+- [ ] Criar endpoint de atualização de heróis, todos os campos poderão ser atualizados. ***Caso não encontre o herói o sistema deve retornar um erro 404 (Not Found)***;
+- [ ] Criar endpoint de exclusão de heróis. A exclusão será física, ok? (Física?! É, deleta o registro da base). ***Caso não encontre o herói o sistema deve retornar um erro 404 (Not Found)***;
+- [ ] Criar testes unitários e de integração das funcionalidades desenvolvidas. ***As classes de teste unitário terminam com o prefixo `Test.java` e as classes de teste de integração terminam com `IT.java`. Temos um modelo de classe de exemplo dentro do projeto***; 
+- [ ] Criar um `docker-compose.yml` funcional para execução da aplicação. (Banco de Dados + API).
 
 Ah, tem algo mais! O Sr. Wayne nos pediu para criar um endpoint onde ele possa selecionar dois heróis e comparar seus atributos força, agilidade, dextreza e inteligência. Como resultado, o sistema deve retornar um objeto contendo os id's e a diferença dos atributos (positivo se maior, negativo se menor) de cada herói. Dá uma pensada em como vai ficar esse objeto e o caminho do endpoint, tudo bem?
 <p>
