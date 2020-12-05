@@ -42,10 +42,9 @@ public class PowerStatsController {
     }
 
     @PostMapping
-    public ResponseEntity<EntityModel<PowerStats>> createHero(@RequestBody PowerStats powerStats) {
+    public ResponseEntity<EntityModel<PowerStats>> createPowerStats(@RequestBody PowerStats powerStats) {
         PowerStats newPowerStats = service.save(powerStats);
-        return ResponseEntity //
-                .created(linkTo(methodOn(PowerStatsController.class).getOnePowerStats(newPowerStats.getId())).toUri()) //
+        return ResponseEntity.created(linkTo(methodOn(PowerStatsController.class).getOnePowerStats(newPowerStats.getId())).toUri())
                 .body(assembler.toModel(newPowerStats));
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -47,5 +48,14 @@ public class HeroController {
         Hero newHero = heroService.save(hero);
         return ResponseEntity.created(linkTo(methodOn(HeroController.class).getOneHero(newHero.getId())).toUri())
                 .body(heroAssembler.toModel(newHero));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<EntityModel<Hero>> updateHero(@PathVariable UUID id, @RequestBody Map<String, String> heroMap) {
+        Hero hero = heroService.findHeroBy(id);
+        hero = heroService.patchHero(hero, heroMap);
+        Hero updatedHero = heroService.update(hero);
+        return ResponseEntity.created(linkTo(methodOn(HeroController.class).getOneHero(updatedHero.getId())).toUri())
+                .body(heroAssembler.toModel(updatedHero));
     }
 }
