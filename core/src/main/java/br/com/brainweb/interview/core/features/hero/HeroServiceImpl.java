@@ -77,4 +77,9 @@ public class HeroServiceImpl implements HeroService {
         });
         return hero;
     }
+
+    @Override
+    public void delete(Hero hero) {
+        heroRepository.delete(hero);
+    }
 }

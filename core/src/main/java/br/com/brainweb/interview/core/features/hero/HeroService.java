@@ -17,4 +17,6 @@ interface HeroService {
     Hero update(Hero hero);
 
     Hero patchHero(Hero hero, Map<String, String> heroMap);
+
+    void delete(Hero hero);
 }
