@@ -15,7 +15,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/hero")
+@RequestMapping("/heroes")
 public class HeroController {
 
     private HeroService heroService;
@@ -28,24 +28,24 @@ public class HeroController {
     }
 
     @GetMapping
-    public CollectionModel<EntityModel<Hero>> getAllHeroes() {
-        List<EntityModel<Hero>> heroes =
-                heroService.findAll().stream()
-                        .map(heroAssembler::toModel).collect(Collectors.toList());
-        return new CollectionModel<>(heroes, linkTo(methodOn(HeroController.class).getAllHeroes()).withSelfRel());
+    public CollectionModel<EntityModel<Hero>> getAllHeroes(@RequestParam(required = false) String name) {
+        List<EntityModel<Hero>> heroes = heroService.findAll(name).stream()
+                .map(heroAssembler::toModel).collect(Collectors.toList());
+
+        return new CollectionModel<>(heroes,
+                linkTo(methodOn(HeroController.class).getAllHeroes(null)).withSelfRel());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EntityModel<Hero>> getOneHero(@PathVariable("id") UUID id) {
-        Hero hero = heroService.getOne(id);
+    public ResponseEntity<EntityModel<Hero>> getOneHero(@PathVariable UUID id) {
+        Hero hero = heroService.findHeroBy(id);
         return ResponseEntity.ok().body(heroAssembler.toModel(hero));
     }
 
     @PostMapping
     public ResponseEntity<EntityModel<Hero>> createHero(@RequestBody Hero hero) {
         Hero newHero = heroService.save(hero);
-        return ResponseEntity //
-                .created(linkTo(methodOn(HeroController.class).getOneHero(newHero.getId())).toUri()) //
+        return ResponseEntity.created(linkTo(methodOn(HeroController.class).getOneHero(newHero.getId())).toUri())
                 .body(heroAssembler.toModel(newHero));
     }
 }

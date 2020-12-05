@@ -29,7 +29,8 @@ public class Hero implements Serializable {
     private String name;
 
     @NonNull
-    private String race;
+    @Enumerated(EnumType.STRING)
+    private RACE race;
 
     @NonNull
     private Boolean enabled;

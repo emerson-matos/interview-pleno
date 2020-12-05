@@ -1,6 +1,5 @@
 package br.com.brainweb.interview.core.features.powerstats;
 
-import br.com.brainweb.interview.core.features.hero.HeroController;
 import br.com.brainweb.interview.model.PowerStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -33,11 +32,11 @@ public class PowerStatsController {
         List<EntityModel<PowerStats>> heroes =
                 service.findAll().stream()
                         .map(assembler::toModel).collect(Collectors.toList());
-        return new CollectionModel<>(heroes, linkTo(methodOn(HeroController.class).getAllHeroes()).withSelfRel());
+        return new CollectionModel<>(heroes, linkTo(methodOn(PowerStatsController.class).getAllPowerStats()).withSelfRel());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EntityModel<PowerStats>> getOnePowerStats(@PathVariable("id") UUID id) {
+    public ResponseEntity<EntityModel<PowerStats>> getOnePowerStats(@PathVariable UUID id) {
         PowerStats ps = service.findOne(id);
         return ResponseEntity.ok().body(assembler.toModel(ps));
     }

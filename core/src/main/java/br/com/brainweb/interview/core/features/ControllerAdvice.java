@@ -1,6 +1,6 @@
 package br.com.brainweb.interview.core.features;
 
-import br.com.brainweb.interview.core.exception.NotFoundException;
+import br.com.brainweb.interview.exception.NotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
